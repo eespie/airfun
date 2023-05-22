@@ -14,8 +14,8 @@ func bind_events() -> void:
 func _exit_tree():
 	Events.unregister_node(self)
 
-func _on_new_game(name: String) ->void:
-	game_name = name
+func _on_new_game(mode_name: String) ->void:
+	game_name = mode_name
 	high_score = GameInfo.get_value(game_name, "high_score", 0)
 
 func _on_increment_score() ->void:
@@ -23,5 +23,5 @@ func _on_increment_score() ->void:
 	text = "Score " + str(score)
 	if score > high_score:
 		high_score = score
-		Events.trigger("new_high_score", game_name, high_score)
+		Events.trigger("new_high_score", high_score)
 

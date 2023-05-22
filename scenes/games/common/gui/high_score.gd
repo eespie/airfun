@@ -16,12 +16,12 @@ func _exit_tree():
 func display_high_score() -> void:
 	text = "HighScore " + str(high_score)
 
-func _on_new_game(name: String) ->void:
-	game_name = name
+func _on_new_game(mode_name: String) ->void:
+	game_name = mode_name
 	high_score = GameInfo.get_value(game_name, "high_score", 0)
 	display_high_score()
 
-func _on_new_high_score(game_name: String, score: int) -> void:
+func _on_new_high_score(score: int) -> void:
 	if score <= high_score:
 		return
 	high_score = score

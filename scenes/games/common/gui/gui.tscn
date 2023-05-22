@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://cobaxpg7avvu2"]
 
-[ext_resource type="Theme" uid="uid://bkflfrecdmlo2" path="res://assets/themes/default_theme.tres" id="1_fo5bj"]
-[ext_resource type="Script" path="res://scenes/games/common/score.gd" id="2_i7ibk"]
-[ext_resource type="Script" path="res://scenes/games/common/high_score.gd" id="3_6kg8y"]
-[ext_resource type="PackedScene" uid="uid://cko02oljhiby" path="res://scenes/paused/paused.tscn" id="4_u4bxb"]
+[ext_resource type="Theme" uid="uid://bkflfrecdmlo2" path="res://assets/themes/default_theme.tres" id="1_p7yp0"]
+[ext_resource type="Script" path="res://scenes/games/common/gui/score.gd" id="2_5p6r5"]
+[ext_resource type="Script" path="res://scenes/games/common/gui/high_score.gd" id="3_b2dlj"]
+[ext_resource type="PackedScene" uid="uid://cko02oljhiby" path="res://scenes/paused/paused.tscn" id="4_ubofy"]
 
 [node name="GUI" type="Control"]
 layout_mode = 3
@@ -16,7 +16,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = ExtResource("1_fo5bj")
+theme = ExtResource("1_p7yp0")
 
 [node name="Score" type="Label" parent="."]
 layout_mode = 1
@@ -25,7 +25,7 @@ offset_top = 20.0
 offset_right = 100.0
 offset_bottom = 68.0
 text = "Score 0"
-script = ExtResource("2_i7ibk")
+script = ExtResource("2_5p6r5")
 
 [node name="HighScore" type="Label" parent="."]
 layout_mode = 1
@@ -38,8 +38,8 @@ offset_right = -20.0
 offset_bottom = 68.0
 grow_horizontal = 0
 text = "HighScore 123456"
-script = ExtResource("3_6kg8y")
+script = ExtResource("3_b2dlj")
 
-[node name="Paused" parent="." instance=ExtResource("4_u4bxb")]
+[node name="Paused" parent="." instance=ExtResource("4_ubofy")]
 visible = false
 layout_mode = 1
