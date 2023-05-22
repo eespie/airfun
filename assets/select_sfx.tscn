@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cee5dna3u27jf"]
+
+[ext_resource type="AudioStream" uid="uid://cg12u316lgyn4" path="res://assets/sounds/switch2.ogg" id="1_5ohhr"]
+
+[node name="SelectSfx" type="AudioStreamPlayer"]
+process_mode = 3
+stream = ExtResource("1_5ohhr")

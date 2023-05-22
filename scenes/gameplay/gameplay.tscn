@@ -1,0 +1,65 @@
+[gd_scene load_steps=4 format=3 uid="uid://b0jqgn60vrbrk"]
+
+[ext_resource type="Script" path="res://scenes/gameplay/gameplay.gd" id="1_k075f"]
+[ext_resource type="Texture2D" uid="uid://bgprycbqd2tbx" path="res://assets/icon.svg" id="2_oisjo"]
+[ext_resource type="PackedScene" uid="uid://cko02oljhiby" path="res://scenes/paused/paused.tscn" id="3_x7ku6"]
+
+[node name="Gameplay" type="Node2D"]
+script = ExtResource("1_k075f")
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(954, 538)
+texture = ExtResource("2_oisjo")
+
+[node name="GUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Stack" type="VFlowContainer" parent="GUI"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -168.5
+offset_top = 150.0
+offset_right = 168.5
+offset_bottom = 757.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+metadata/_edit_group_ = true
+
+[node name="Title" type="Label" parent="GUI/Stack"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_type_variation = &"HeaderLarge"
+text = "GAMEPLAY"
+
+[node name="Instructions" type="Label" parent="GUI/Stack"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Get started with Godot Skeleton by replacing this Gameplay scene with your own."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="PauseInstructions" type="Label" parent="GUI/Stack"]
+layout_mode = 2
+text = "Press START, P, or ESC to open pause menu."
+horizontal_alignment = 1
+
+[node name="LinkButton" type="LinkButton" parent="GUI/Stack"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "View Template Source"
+uri = "https://github.com/brettchalupa/godot_skeleton"
+
+[node name="Paused" parent="GUI" instance=ExtResource("3_x7ku6")]
+visible = false
+layout_mode = 1
