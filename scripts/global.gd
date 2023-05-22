@@ -9,6 +9,7 @@ const EXPORT_CONFIG_FILE := "res://export.cfg"
 const EXPORT_CONFIG_METADATA_SECTION := "metadata"
 const SETTINGS_FILE := "user://settings.cfg"
 const CONFIG_SETTINGS_SECTION := "settings"
+const CONFIG_GAMES_SECTION := "games"
 
 func _ready() -> void:
 	print_debug("Global ready")

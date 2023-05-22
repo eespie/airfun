@@ -11,7 +11,7 @@ func _ready():
 func bind_events() -> void:
 	Events.register("change_scene", self, Events.DEFERRED)
 	Events.register("change_scene_root", self, Events.DEFERRED)
-	
+
 func _on_change_scene(path: String) -> void:
 	self._on_change_scene_root(path, get_tree())
 

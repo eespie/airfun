@@ -1,0 +1,12 @@
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://bkflfrecdmlo2"]
+
+[ext_resource type="FontFile" uid="uid://vv777y555brd" path="res://assets/fonts/pablo-impallari_dosis/Dosis-Bold.ttf" id="1_hpqko"]
+[ext_resource type="Texture2D" uid="uid://cc5sd1aj8ddmq" path="res://assets/themes/switch-on.png" id="1_qohdv"]
+[ext_resource type="Texture2D" uid="uid://d2e8beum34uc0" path="res://assets/themes/switch-off.png" id="2_co6dg"]
+
+[resource]
+default_font = ExtResource("1_hpqko")
+default_font_size = 35
+CheckButton/constants/h_separation = 15
+CheckButton/icons/checked = ExtResource("1_qohdv")
+CheckButton/icons/unchecked = ExtResource("2_co6dg")

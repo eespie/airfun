@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://c5lgliwo3dm5o"]
+
+[ext_resource type="Script" path="res://scenes/games/common/game.gd" id="1_p6mwk"]
+[ext_resource type="Texture2D" uid="uid://bq050ylakuguo" path="res://assets/images/map2.png" id="2_apyar"]
+[ext_resource type="PackedScene" uid="uid://cobaxpg7avvu2" path="res://scenes/games/common/gui.tscn" id="3_28r50"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_p6mwk")
+game_name = "random_fun"
+
+[node name="map" type="Sprite2D" parent="."]
+texture = ExtResource("2_apyar")
+centered = false
+
+[node name="GUI" parent="." instance=ExtResource("3_28r50")]

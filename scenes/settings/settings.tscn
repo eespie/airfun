@@ -1,11 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://dqfq6on37vchy"]
+[gd_scene load_steps=11 format=3 uid="uid://dqfq6on37vchy"]
 
 [ext_resource type="Script" path="res://scenes/settings/settings_controls.gd" id="1_na4vu"]
+[ext_resource type="Theme" uid="uid://bkflfrecdmlo2" path="res://assets/themes/default_theme.tres" id="1_wlf6d"]
+[ext_resource type="Texture2D" uid="uid://bq050ylakuguo" path="res://assets/images/map2.png" id="2_o2e8i"]
 [ext_resource type="Script" path="res://scenes/settings/fullscreen_toggle.gd" id="2_ysxyu"]
 [ext_resource type="Script" path="res://scenes/settings/sfx_toggle.gd" id="3_3i430"]
 [ext_resource type="Script" path="res://scenes/settings/music_toggle.gd" id="4_mavl3"]
 [ext_resource type="Script" path="res://scenes/settings/back_button.gd" id="5_kkoqo"]
 [ext_resource type="AudioStream" uid="uid://ce2e610h5dh5g" path="res://assets/sounds/rollover5.ogg" id="6_vmmvy"]
+[ext_resource type="AudioStream" uid="uid://cjkk6v5u8bcxa" path="res://assets/sounds/switch_005.ogg" id="7_16vjt"]
 [ext_resource type="AudioStream" uid="uid://cg12u316lgyn4" path="res://assets/sounds/switch2.ogg" id="7_um5xe"]
 
 [node name="Settings" type="Control"]
@@ -15,6 +18,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_wlf6d")
 
 [node name="BG" type="ColorRect" parent="."]
 layout_mode = 0
@@ -23,6 +27,10 @@ offset_top = -30.0
 offset_right = 1955.0
 offset_bottom = 1110.0
 color = Color(0.501961, 0.223529, 0.27451, 1)
+
+[node name="BackgroundMap" type="Sprite2D" parent="."]
+texture = ExtResource("2_o2e8i")
+centered = false
 
 [node name="Title" type="Label" parent="."]
 layout_mode = 1
@@ -35,6 +43,7 @@ offset_right = 54.5
 offset_bottom = 106.0
 grow_horizontal = 2
 theme_type_variation = &"HeaderLarge"
+theme_override_font_sizes/font_size = 100
 text = "Settings"
 horizontal_alignment = 1
 
@@ -86,11 +95,13 @@ text = "Music"
 script = ExtResource("4_mavl3")
 
 [node name="BackButton" type="Button" parent="SettingsControls"]
+custom_minimum_size = Vector2(350, 0)
 layout_mode = 2
 text = "Back"
 script = ExtResource("5_kkoqo")
 
 [node name="EnterSFX" type="AudioStreamPlayer2D" parent="SettingsControls"]
+stream = ExtResource("7_16vjt")
 
 [node name="OverSFX" type="AudioStreamPlayer2D" parent="SettingsControls"]
 stream = ExtResource("6_vmmvy")

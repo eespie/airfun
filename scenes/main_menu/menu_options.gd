@@ -13,7 +13,7 @@ func _on_settings_pressed() -> void:
 	Events.trigger("change_scene", "settings/settings")
 
 func _on_start_pressed() -> void:
-	Events.trigger("change_scene", "gameplay/gameplay")
+	Events.trigger("change_scene", "game_modes/game_modes")
 
 func _on_button_mouse_entered() -> void:
 	Sound.play_sfx($Over)

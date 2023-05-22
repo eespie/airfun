@@ -14,7 +14,7 @@ config/name="Air Fun"
 config/description="[Add your description here!]"
 run/main_scene="res://scenes/main_menu/main_menu.tscn"
 config/features=PackedStringArray("4.0", "Mobile")
-boot_splash/image="res://assets/logo-eboreal.png"
+boot_splash/image="res://assets/images/map2.png"
 config/icon="res://assets/icon.svg"
 
 [autoload]
@@ -23,6 +23,8 @@ Global="*res://scripts/global.gd"
 Sound="*res://scripts/sound.gd"
 Events="*res://addons/e_boreal/events.gd"
 Scene="*res://addons/e_boreal/scene.gd"
+File="*res://scripts/file.gd"
+GameInfo="*res://scripts/game_info.gd"
 
 [display]
 

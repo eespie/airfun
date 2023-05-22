@@ -1,0 +1,119 @@
+[gd_scene load_steps=6 format=3 uid="uid://bqdhtghr56kml"]
+
+[ext_resource type="Texture2D" uid="uid://bq050ylakuguo" path="res://assets/images/map2.png" id="1_e2wt0"]
+[ext_resource type="Theme" uid="uid://bkflfrecdmlo2" path="res://assets/themes/default_theme.tres" id="2_8x18v"]
+[ext_resource type="Script" path="res://scenes/game_modes/mode_options.gd" id="3_f6ohd"]
+[ext_resource type="AudioStream" uid="uid://ce2e610h5dh5g" path="res://assets/sounds/rollover5.ogg" id="5_iuu52"]
+[ext_resource type="AudioStream" uid="uid://nae25xj2of8v" path="res://assets/sounds/switch_006.ogg" id="6_1dyyv"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BG" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -35.0
+offset_top = -30.0
+offset_right = 1955.0
+offset_bottom = 1110.0
+color = Color(0.227451, 0.368627, 0.521569, 1)
+
+[node name="BackgroundMap" type="Sprite2D" parent="."]
+texture = ExtResource("1_e2wt0")
+centered = false
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -65.5
+offset_top = 93.0
+offset_right = 65.5
+offset_bottom = 135.0
+grow_horizontal = 2
+theme = ExtResource("2_8x18v")
+theme_type_variation = &"HeaderLarge"
+theme_override_font_sizes/font_size = 100
+text = "GAME MODES"
+horizontal_alignment = 1
+
+[node name="Instructions" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 29.0
+offset_top = -134.0
+offset_right = 340.0
+offset_bottom = -30.0
+grow_vertical = 0
+theme = ExtResource("2_8x18v")
+text = "INSTRUCTIONS
+Link the airplanes to their destination
+and avoid collisions"
+
+[node name="DebugUIStatus" type="Label" parent="." groups=["debug_ui"]]
+visible = false
+layout_mode = 0
+offset_left = 24.0
+offset_top = 23.0
+offset_right = 162.0
+offset_bottom = 49.0
+text = "Debug UI enabled"
+
+[node name="ModesOptions" type="VFlowContainer" parent="." node_paths=PackedStringArray("shortcut_context")]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -35.0
+offset_top = 192.0
+offset_right = 36.0
+offset_bottom = -9.0
+grow_horizontal = 2
+grow_vertical = 2
+shortcut_context = NodePath("Air Random Fun")
+theme = ExtResource("2_8x18v")
+alignment = 1
+script = ExtResource("3_f6ohd")
+
+[node name="Air Random Fun" type="Button" parent="ModesOptions"]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+text = "Air Random Fun"
+
+[node name="Air Transit Fun" type="Button" parent="ModesOptions"]
+layout_mode = 2
+text = "Air Transit Fun"
+
+[node name="Air Landing Fun" type="Button" parent="ModesOptions"]
+layout_mode = 2
+text = "Air Landing Fun"
+
+[node name="Back" type="Button" parent="ModesOptions"]
+layout_mode = 2
+text = "Back
+"
+
+[node name="Over" type="AudioStreamPlayer2D" parent="ModesOptions"]
+position = Vector2(-925, -192)
+stream = ExtResource("5_iuu52")
+
+[node name="EnterSFX" type="AudioStreamPlayer2D" parent="ModesOptions"]
+position = Vector2(-925, -192)
+stream = ExtResource("6_1dyyv")
+
+[connection signal="mouse_entered" from="ModesOptions/Air Random Fun" to="ModesOptions" method="_on_button_mouse_entered"]
+[connection signal="pressed" from="ModesOptions/Air Random Fun" to="ModesOptions" method="_on_random_pressed"]
+[connection signal="mouse_entered" from="ModesOptions/Air Transit Fun" to="ModesOptions" method="_on_button_mouse_entered"]
+[connection signal="pressed" from="ModesOptions/Air Transit Fun" to="ModesOptions" method="_on_transit_pressed"]
+[connection signal="mouse_entered" from="ModesOptions/Air Landing Fun" to="ModesOptions" method="_on_button_mouse_entered"]
+[connection signal="pressed" from="ModesOptions/Air Landing Fun" to="ModesOptions" method="_on_landing_pressed"]
+[connection signal="mouse_entered" from="ModesOptions/Back" to="ModesOptions" method="_on_button_mouse_entered"]
+[connection signal="pressed" from="ModesOptions/Back" to="ModesOptions" method="_on_back_pressed"]

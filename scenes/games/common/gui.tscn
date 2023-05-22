@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3 uid="uid://cobaxpg7avvu2"]
+
+[ext_resource type="Theme" uid="uid://bkflfrecdmlo2" path="res://assets/themes/default_theme.tres" id="1_fo5bj"]
+[ext_resource type="Script" path="res://scenes/games/common/score.gd" id="2_i7ibk"]
+[ext_resource type="Script" path="res://scenes/games/common/high_score.gd" id="3_6kg8y"]
+[ext_resource type="PackedScene" uid="uid://cko02oljhiby" path="res://scenes/paused/paused.tscn" id="4_u4bxb"]
+
+[node name="GUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("1_fo5bj")
+
+[node name="Score" type="Label" parent="."]
+layout_mode = 1
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 100.0
+offset_bottom = 68.0
+text = "Score 0"
+script = ExtResource("2_i7ibk")
+
+[node name="HighScore" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -170.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 68.0
+grow_horizontal = 0
+text = "HighScore 123456"
+script = ExtResource("3_6kg8y")
+
+[node name="Paused" parent="." instance=ExtResource("4_u4bxb")]
+visible = false
+layout_mode = 1

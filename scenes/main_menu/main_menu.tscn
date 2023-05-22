@@ -1,5 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://brk6pe1mqx36n"]
+[gd_scene load_steps=7 format=3 uid="uid://brk6pe1mqx36n"]
 
+[ext_resource type="Theme" uid="uid://bkflfrecdmlo2" path="res://assets/themes/default_theme.tres" id="1_c0giq"]
+[ext_resource type="Texture2D" uid="uid://bq050ylakuguo" path="res://assets/images/map2.png" id="1_eq578"]
 [ext_resource type="Script" path="res://scenes/main_menu/version_label.gd" id="1_s1lxo"]
 [ext_resource type="Script" path="res://scenes/main_menu/menu_options.gd" id="2_xaiuv"]
 [ext_resource type="AudioStream" uid="uid://nae25xj2of8v" path="res://assets/sounds/switch_006.ogg" id="5_uxbfp"]
@@ -21,6 +23,10 @@ offset_right = 1955.0
 offset_bottom = 1110.0
 color = Color(0.227451, 0.368627, 0.521569, 1)
 
+[node name="BackgroundMap" type="Sprite2D" parent="."]
+texture = ExtResource("1_eq578")
+centered = false
+
 [node name="Title" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 5
@@ -31,8 +37,10 @@ offset_top = 93.0
 offset_right = 65.5
 offset_bottom = 135.0
 grow_horizontal = 2
+theme = ExtResource("1_c0giq")
 theme_type_variation = &"HeaderLarge"
-text = "YOUR GAME"
+theme_override_font_sizes/font_size = 100
+text = "AIR FUN"
 horizontal_alignment = 1
 
 [node name="Credit" type="Label" parent="."]
@@ -40,12 +48,14 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -59.5
-offset_top = 156.0
-offset_right = 59.5
-offset_bottom = 182.0
+offset_left = -107.0
+offset_top = 250.0
+offset_right = 107.0
+offset_bottom = 298.0
 grow_horizontal = 2
-text = "A game by YOU"
+theme = ExtResource("1_c0giq")
+text = "A game by eBoreal
+"
 
 [node name="Controls" type="Label" parent="."]
 layout_mode = 1
@@ -60,6 +70,7 @@ offset_right = -32.0
 offset_bottom = -36.0
 grow_horizontal = 0
 grow_vertical = 0
+theme = ExtResource("1_c0giq")
 text = "CONTROLS
 Move: WASD | Accept: J | Cancel: K | Pause: P
 Move: Arrow Keys | Accept: Z | Cancel: Z | Pause: Esc
@@ -76,6 +87,7 @@ offset_top = -134.0
 offset_right = 340.0
 offset_bottom = -30.0
 grow_vertical = 0
+theme = ExtResource("1_c0giq")
 text = "INSTRUCTIONS
 Collect all the things!"
 
@@ -89,6 +101,7 @@ offset_top = 21.0
 offset_right = -32.0
 offset_bottom = 47.0
 grow_horizontal = 0
+theme = ExtResource("1_c0giq")
 text = "Version: [set dynamically]"
 horizontal_alignment = 2
 script = ExtResource("1_s1lxo")
@@ -115,10 +128,12 @@ offset_bottom = -9.0
 grow_horizontal = 2
 grow_vertical = 2
 shortcut_context = NodePath("Start")
+theme = ExtResource("1_c0giq")
 alignment = 1
 script = ExtResource("2_xaiuv")
 
 [node name="Start" type="Button" parent="MenuOptions"]
+custom_minimum_size = Vector2(350, 0)
 layout_mode = 2
 text = "Start"
 
