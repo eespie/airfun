@@ -102,11 +102,9 @@ text = "Back
 "
 
 [node name="Over" type="AudioStreamPlayer2D" parent="ModesOptions"]
-position = Vector2(-925, -192)
 stream = ExtResource("5_iuu52")
 
 [node name="EnterSFX" type="AudioStreamPlayer2D" parent="ModesOptions"]
-position = Vector2(-925, -192)
 stream = ExtResource("6_1dyyv")
 
 [connection signal="mouse_entered" from="ModesOptions/Air Random Fun" to="ModesOptions" method="_on_button_mouse_entered"]

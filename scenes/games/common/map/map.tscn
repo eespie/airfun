@@ -31,3 +31,5 @@ sources/0 = SubResource("TileSetAtlasSource_hc0v2")
 tile_set = SubResource("TileSet_wwbyu")
 format = 2
 script = ExtResource("1_k8yax")
+ratio = 0.5
+water_height = -0.3

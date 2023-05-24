@@ -1,16 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://c5lgliwo3dm5o"]
+[gd_scene load_steps=4 format=3 uid="uid://c5lgliwo3dm5o"]
 
 [ext_resource type="Script" path="res://scenes/games/common/game.gd" id="1_p6mwk"]
-[ext_resource type="PackedScene" uid="uid://80l1dlqwiioj" path="res://scenes/games/common/map/map.tscn" id="2_raue7"]
+[ext_resource type="PackedScene" uid="uid://cl753w6ikhxsk" path="res://scenes/games/common/terrain/terrain.tscn" id="2_crgba"]
 [ext_resource type="PackedScene" uid="uid://cobaxpg7avvu2" path="res://scenes/games/common/gui/gui.tscn" id="3_28r50"]
-[ext_resource type="TileSet" uid="uid://bo4ggjqil28r8" path="res://scenes/games/common/map/tileset.tres" id="3_jayde"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_p6mwk")
 game_name = "random_fun"
 
-[node name="Map" parent="." instance=ExtResource("2_raue7")]
-tile_set = ExtResource("3_jayde")
+[node name="terrain" parent="." instance=ExtResource("2_crgba")]
 
 [node name="GUI" parent="." instance=ExtResource("3_28r50")]
 
