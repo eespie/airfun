@@ -25,12 +25,10 @@ void fragment() {
 	vec3 final_color;
 	
 
-	final_color = mix(water, mix(sand, 
-		mix(grass, 
-			mix(rock, snow, smoothstep(min_rock_height, min_snow_height, vert_height)), 
+	final_color = mix(water, mix(sand, mix(grass, mix(rock, snow, smoothstep(min_rock_height, min_snow_height, vert_height)), 
 		smoothstep(min_grass_height, min_rock_height, vert_height)),
-	smoothstep(0, min_grass_height, vert_height)),
-	smoothstep(-1, min_grass_height, vert_height));
+		smoothstep(0, min_grass_height, vert_height)),
+		smoothstep(-1, min_grass_height, vert_height));
 
 	ALBEDO = final_color.rgb;
 }
