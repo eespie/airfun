@@ -35,7 +35,12 @@ func generate_terrain() -> void:
 	for z in range(zSize + 1):
 		for x in range(xSize + 1):
 			var y = get_terrain_height(x, z)
+			var uv = Vector2()
+			uv.x = inverse_lerp(0, xSize, x)
+			uv.y = inverse_lerp(0, zSize, z)
+			surface_tool.set_uv(uv)
 			surface_tool.add_vertex(Vector3(x, y, z))
+			
 	
 	var vert = 0
 	for z in range(zSize):
@@ -69,10 +74,10 @@ func init_terrain_noise() -> void:
 func get_terrain_height(x, z) -> float:
 	var height: float = (terrain_noise.get_noise_2d(x, z) + 1.0) / 2.0
 	height = height * height - water_level
-	
-	if height < 0:
-		height = 0
-	
+
+	if height < 0.0:
+		height = 0.0
+
 	return height * height_max
 
 func _process(_delta):
