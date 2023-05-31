@@ -31,11 +31,16 @@ void fragment() {
 		smoothstep(-1, min_grass_height, vert_height));
 
 	ALBEDO = final_color.rgb;
+	//METALLIC = 0.0;
+	//ROUGHNESS = 1.0;
+	//EMISSION = vec3(0,0,0);
+	//SPECULAR = 0.0;
 }
 
 void vertex() {
 	vertex_y = VERTEX.y;
-	if (vertex_y < 0.0) {
-		VERTEX.y = 0.0;
-	}
+}
+
+void light() {
+    DIFFUSE_LIGHT += clamp(dot(NORMAL, LIGHT), 0.0, 1.0) * ATTENUATION * ALBEDO;
 }

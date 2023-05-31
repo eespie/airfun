@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://0bib71iellpn"]
+
+[ext_resource type="PackedScene" uid="uid://boobl7c71jd4y" path="res://assets/3D/A320/A320.gltf" id="1_vva7x"]
+
+[node name="A320" type="Node3D"]
+
+[node name="A320" parent="." instance=ExtResource("1_vva7x")]

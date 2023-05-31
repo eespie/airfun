@@ -36,6 +36,10 @@ window/stretch/mode="canvas_items"
 
 enabled=PackedStringArray("res://addons/e_boreal/plugin.cfg")
 
+[filesystem]
+
+import/fbx/enabled=false
+
 [input]
 
 ui_accept={

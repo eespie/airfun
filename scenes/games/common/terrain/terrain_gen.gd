@@ -1,4 +1,3 @@
-@tool
 extends MeshInstance3D
 
 @export_category("Mesh Settings")
