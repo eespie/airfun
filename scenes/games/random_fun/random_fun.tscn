@@ -1,22 +1,18 @@
-[gd_scene load_steps=16 format=3 uid="uid://tos5wickywea"]
+[gd_scene load_steps=8 format=3 uid="uid://tos5wickywea"]
 
 [ext_resource type="Script" path="res://scenes/games/common/game.gd" id="1_4mh7j"]
+[ext_resource type="Script" path="res://scenes/games/random_fun/random_fun.gd" id="2_4kswr"]
 [ext_resource type="PackedScene" uid="uid://cobaxpg7avvu2" path="res://scenes/games/common/gui/gui.tscn" id="3_28r50"]
-[ext_resource type="Texture2D" uid="uid://c13gvvxs1np3m" path="res://assets/2D/sprite-1.png" id="3_ko3hj"]
-[ext_resource type="Texture2D" uid="uid://c0ovmhpqcqivn" path="res://assets/2D/sprite-2.png" id="4_mcris"]
-[ext_resource type="Texture2D" uid="uid://ijerrdvosriu" path="res://assets/2D/sprite-3.png" id="5_tiqrc"]
-[ext_resource type="Texture2D" uid="uid://dc3pcn1iyps6a" path="res://assets/2D/crosshair062.png" id="6_ad07f"]
-[ext_resource type="Texture2D" uid="uid://k2dpb0bky8g8" path="res://assets/2D/avion(6).png" id="7_oml4a"]
-[ext_resource type="Texture2D" uid="uid://vsi020h7vmyq" path="res://assets/2D/crosshair024.png" id="7_yytrx"]
+[ext_resource type="PackedScene" uid="uid://drmf6emnmt2pd" path="res://scenes/games/common/plane_path/plane_path.tscn" id="3_wii74"]
 
 [sub_resource type="Gradient" id="Gradient_qxaw8"]
 interpolation_mode = 1
-offsets = PackedFloat32Array(0, 0.0297297, 0.208108, 0.467568, 0.643243, 0.727027, 0.759162, 1)
-colors = PackedColorArray(0.703808, 0.703808, 0.703808, 1, 0.552956, 0.552956, 0.552955, 1, 0.2538, 0.54, 0.42552, 1, 0.301783, 0.647498, 0.507429, 1, 0.65311, 0.580372, 0.371376, 1, 0.754498, 0.704219, 0.254275, 1, 0.4186, 0.62335, 0.91, 1, 0.546737, 0.695827, 1, 1)
+offsets = PackedFloat32Array(0, 0.0395648, 0.176063, 0.432245, 0.684471, 0.727027, 0.759162, 1)
+colors = PackedColorArray(0.703808, 0.703808, 0.703808, 1, 0.552956, 0.552956, 0.552955, 1, 0.2538, 0.54, 0.42552, 1, 0.301783, 0.647498, 0.507429, 1, 0.654902, 0.580392, 0.372549, 1, 0.754498, 0.704219, 0.254275, 1, 0.4186, 0.62335, 0.91, 1, 0.546737, 0.695827, 1, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_p4mc6"]
 frequency = 0.002
-fractal_lacunarity = 3.5
+fractal_lacunarity = 2.2
 fractal_weighted_strength = 0.33
 domain_warp_type = 1
 
@@ -27,22 +23,10 @@ generate_mipmaps = false
 color_ramp = SubResource("Gradient_qxaw8")
 noise = SubResource("FastNoiseLite_p4mc6")
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_0qnm1"]
-blend_mode = 1
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_07ate"]
-blend_mode = 1
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_vjcae"]
-blend_mode = 1
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_noan2"]
-blend_mode = 1
-
-[node name="random_fun" type="Node2D"]
+[node name="Game" type="Node2D"]
 script = ExtResource("1_4mh7j")
 
-[node name="Control" type="Control" parent="."]
+[node name="Screen" type="Control" parent="."]
 custom_minimum_size = Vector2(1920, 1080)
 layout_mode = 3
 anchors_preset = 15
@@ -53,7 +37,7 @@ offset_bottom = 1080.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="Control" groups=["terrain"]]
+[node name="Background" type="TextureRect" parent="Screen" groups=["terrain"]]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -61,44 +45,21 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("NoiseTexture2D_555lb")
-
-[node name="Sprite-1" type="Sprite2D" parent="."]
-material = SubResource("CanvasItemMaterial_0qnm1")
-position = Vector2(520, 597)
-scale = Vector2(0.15, 0.15)
-texture = ExtResource("3_ko3hj")
-
-[node name="Sprite-2" type="Sprite2D" parent="."]
-material = SubResource("CanvasItemMaterial_07ate")
-position = Vector2(426, 518)
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("4_mcris")
-
-[node name="Sprite-3" type="Sprite2D" parent="."]
-material = SubResource("CanvasItemMaterial_vjcae")
-position = Vector2(576, 464)
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("5_tiqrc")
-
-[node name="Crosshair062" type="Sprite2D" parent="."]
-position = Vector2(889, 427)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("6_ad07f")
-
-[node name="Crosshair024" type="Sprite2D" parent="."]
-position = Vector2(651, 225)
-scale = Vector2(1.5, 1.5)
-texture = ExtResource("7_yytrx")
-
-[node name="Avion(6)" type="Sprite2D" parent="."]
-material = SubResource("CanvasItemMaterial_noan2")
-position = Vector2(714, 468)
-rotation = 0.785398
-scale = Vector2(0.15, 0.15)
-texture = ExtResource("7_oml4a")
+metadata/_edit_lock_ = true
 
 [node name="GUI" parent="." instance=ExtResource("3_28r50")]
-offset_left = -15.0
-offset_top = -31.0
-offset_right = 1905.0
-offset_bottom = 1049.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+metadata/_edit_lock_ = true
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="RandomFun" type="Node2D" parent="."]
+script = ExtResource("2_4kswr")
+plane_path_scene = ExtResource("3_wii74")
+
+[node name="Planes" type="Node2D" parent="RandomFun"]
+
+[connection signal="timeout" from="Timer" to="RandomFun" method="_on_timer_timeout"]

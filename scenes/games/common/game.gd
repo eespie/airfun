@@ -1,31 +1,42 @@
 extends Node2D
 
+@onready var timer = $Timer
 @export var game_name: String:
 	get:
 		return game_name
+@export var initial_wait_time :float = 0.5
 
-var mouse = Vector2()
+
+enum mouse_states {RELEASED, CLICKED}
+
+var mouse_state: mouse_states = mouse_states.RELEASED
 
 func _ready():
+	bind_events()
 	Events.trigger("new_game", game_name)
+	Events.trigger("timer_next", initial_wait_time)
+
+
+func bind_events() -> void:
+	Events.register("timer_next", self)
+	
+func _exit_tree():
+	Events.unregister_node(self)
+	
 	
 func _process(_delta: float) -> void:
 	pass
-
+	
 func _input(event: InputEvent) -> void:
-	if event.is_action_released("pause"):
-		call_deferred("_pause")
-	if event is InputEventMouse:
-		mouse = event.position
-	if event is InputEventMouseButton and event.is_pressed():
-		get_color()
-				
-func _pause() -> void:
-	$GUI/Paused.pause()
-	get_tree().paused = true
+	if event is InputEventMouseMotion and mouse_state == mouse_states.CLICKED:
+		Events.trigger("mouse_drag", event.position)
+	if event is InputEventMouseButton:
+		if event.is_pressed():
+			mouse_state = mouse_states.CLICKED
+			Events.trigger("mouse_button_clicked", event.position)
+		else:
+			mouse_state = mouse_states.RELEASED
+			Events.trigger("mouse_button_released", event.position)
 
-
-func get_color():
-	var terrain = get_tree().get_first_node_in_group("terrain")
-	
-	
+func _on_timer_next(wait_time: float):
+	$Timer.start(wait_time)
