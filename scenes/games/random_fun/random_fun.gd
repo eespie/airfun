@@ -20,13 +20,14 @@ func _exit_tree():
 	Events.unregister_node(self)
 
 func _on_mouse_drag(mouse: Vector2):
-	pass
+	$Mouse.position = mouse
 	
 func _on_mouse_button_clicked(mouse: Vector2):
-	pass
+	$Mouse.position = mouse
+		
 	
 func _on_mouse_button_released(mouse: Vector2):
-	pass
+	$Mouse.position = Vector2(-100, -100)
 
 func get_color(mouse:Vector2):
 	var color :Color = terrain.get_texture().get_image().get_pixel(mouse.x, mouse.y)

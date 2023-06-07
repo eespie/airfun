@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://tos5wickywea"]
+[gd_scene load_steps=9 format=3 uid="uid://tos5wickywea"]
 
 [ext_resource type="Script" path="res://scenes/games/common/game.gd" id="1_4mh7j"]
 [ext_resource type="Script" path="res://scenes/games/random_fun/random_fun.gd" id="2_4kswr"]
@@ -23,8 +23,12 @@ generate_mipmaps = false
 color_ramp = SubResource("Gradient_qxaw8")
 noise = SubResource("FastNoiseLite_p4mc6")
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_x2yg3"]
+radius = 5.0
+
 [node name="Game" type="Node2D"]
 script = ExtResource("1_4mh7j")
+game_name = "random_fun"
 
 [node name="Screen" type="Control" parent="."]
 custom_minimum_size = Vector2(1920, 1080)
@@ -61,5 +65,12 @@ script = ExtResource("2_4kswr")
 plane_path_scene = ExtResource("3_wii74")
 
 [node name="Planes" type="Node2D" parent="RandomFun"]
+
+[node name="Mouse" type="StaticBody2D" parent="RandomFun"]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RandomFun/Mouse"]
+shape = SubResource("CircleShape2D_x2yg3")
 
 [connection signal="timeout" from="Timer" to="RandomFun" method="_on_timer_timeout"]
