@@ -1,9 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://tos5wickywea"]
+[gd_scene load_steps=8 format=3 uid="uid://tos5wickywea"]
 
 [ext_resource type="Script" path="res://scenes/games/common/game.gd" id="1_4mh7j"]
 [ext_resource type="Script" path="res://scenes/games/random_fun/random_fun.gd" id="2_4kswr"]
 [ext_resource type="PackedScene" uid="uid://cobaxpg7avvu2" path="res://scenes/games/common/gui/gui.tscn" id="3_28r50"]
-[ext_resource type="PackedScene" uid="uid://drmf6emnmt2pd" path="res://scenes/games/common/plane_path/plane_path.tscn" id="3_wii74"]
 
 [sub_resource type="Gradient" id="Gradient_qxaw8"]
 interpolation_mode = 1
@@ -51,18 +50,12 @@ grow_vertical = 2
 texture = SubResource("NoiseTexture2D_555lb")
 metadata/_edit_lock_ = true
 
-[node name="GUI" parent="." instance=ExtResource("3_28r50")]
-offset_right = 1920.0
-offset_bottom = 1080.0
-metadata/_edit_lock_ = true
-
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
 
 [node name="RandomFun" type="Node2D" parent="."]
 script = ExtResource("2_4kswr")
-plane_path_scene = ExtResource("3_wii74")
 
 [node name="Planes" type="Node2D" parent="RandomFun"]
 
@@ -72,5 +65,10 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RandomFun/Mouse"]
 shape = SubResource("CircleShape2D_x2yg3")
+
+[node name="GUI" parent="." instance=ExtResource("3_28r50")]
+offset_right = 1920.0
+offset_bottom = 1080.0
+metadata/_edit_lock_ = true
 
 [connection signal="timeout" from="Timer" to="RandomFun" method="_on_timer_timeout"]

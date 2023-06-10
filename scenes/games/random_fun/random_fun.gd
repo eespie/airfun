@@ -1,10 +1,13 @@
 extends Node2D
 
 
-@export var plane_path_scene: PackedScene
+var plane_path_scene: PackedScene = preload("res://scenes/games/common/plane_path/plane_path.tscn")
 @export var margin :int = 100
 
 var terrain :TextureRect
+
+var plane_id :int = 0
+var plane_count : int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -15,6 +18,7 @@ func bind_events():
 	Events.register("mouse_drag", self)
 	Events.register("mouse_button_clicked", self)
 	Events.register("mouse_button_released", self)
+	Events.register("plane_arrived", self)
 
 func _exit_tree():
 	Events.unregister_node(self)
@@ -42,7 +46,13 @@ func get_target_pos() -> Vector2:
 	return Vector2(0, 0)
 
 func _on_timer_timeout():
+	if plane_count > 5:
+		return
+		
 	var plane_path = plane_path_scene.instantiate()
+	plane_id += 1
+	plane_count += 1
+	plane_path.set_plane_id(plane_id)
 	$Planes.add_child(plane_path)
 	
 	var target_pos = get_target_pos();
@@ -50,5 +60,9 @@ func _on_timer_timeout():
 	
 	var plane_pos = Vector2(randi_range(margin, 1920 - margin), randi_range(margin, 1080 - margin));
 	plane_path.set_plane_pos(plane_pos)
+	Events.trigger("timer_next", 5)
 	
 
+func _on_plane_arrived(plane_id):
+	plane_count -= 1
+	Events.trigger("timer_next", 0.1)

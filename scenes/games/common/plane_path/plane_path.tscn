@@ -1,61 +1,82 @@
-[gd_scene load_steps=8 format=3 uid="uid://drmf6emnmt2pd"]
+[gd_scene load_steps=15 format=3 uid="uid://drmf6emnmt2pd"]
 
 [ext_resource type="Script" path="res://scenes/games/common/plane_path/plane_path.gd" id="1_v7ur2"]
+[ext_resource type="Script" path="res://scenes/games/common/plane_path/target.gd" id="2_mesrh"]
 [ext_resource type="Texture2D" uid="uid://dc3pcn1iyps6a" path="res://assets/2D/crosshair062.png" id="2_nia3m"]
 [ext_resource type="Texture2D" uid="uid://c13gvvxs1np3m" path="res://assets/2D/sprite-1.png" id="3_2yfm5"]
 [ext_resource type="Texture2D" uid="uid://cn7cumsm0dgce" path="res://assets/2D/select.png" id="3_b8tuj"]
+[ext_resource type="Script" path="res://scenes/games/common/plane_path/select_target.gd" id="5_3ejtm"]
+[ext_resource type="Script" path="res://scenes/games/common/plane_path/plane.gd" id="5_aweqk"]
+[ext_resource type="Script" path="res://scenes/games/common/plane_path/select_plane.gd" id="8_34bph"]
+[ext_resource type="Script" path="res://scenes/games/common/plane_path/plane_warning_collision.gd" id="9_733bd"]
+[ext_resource type="Texture2D" uid="uid://dpbbjjogn0xwo" path="res://assets/2D/warning.png" id="10_8j881"]
+[ext_resource type="Script" path="res://scenes/games/common/plane_path/warning.gd" id="11_3yo24"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ah8nq"]
-radius = 60.1332
-
-[sub_resource type="Curve2D" id="Curve2D_tmf41"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_xjg8e"]
+radius = 5.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ihaop"]
 radius = 32.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kv332"]
+radius = 96.0
 
 [node name="PlanePath" type="Node2D" groups=["plane_path"]]
 script = ExtResource("1_v7ur2")
 
 [node name="Target" type="Area2D" parent="." groups=["target"]]
 collision_layer = 2
-collision_mask = 9
 input_pickable = false
+script = ExtResource("2_mesrh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Target"]
-scale = Vector2(0.5, 0.5)
-shape = SubResource("CircleShape2D_ah8nq")
+shape = SubResource("CircleShape2D_xjg8e")
 
 [node name="TargetImage" type="Sprite2D" parent="Target"]
-scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_nia3m")
 
-[node name="Select" type="Sprite2D" parent="Target" groups=["select"]]
+[node name="SelectTarget" type="Sprite2D" parent="Target" groups=["select"]]
 visible = false
-position = Vector2(-1, 0)
+scale = Vector2(0.8, 0.8)
 texture = ExtResource("3_b8tuj")
+script = ExtResource("5_3ejtm")
 
 [node name="Path2D" type="Path2D" parent="."]
-curve = SubResource("Curve2D_tmf41")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
 loop = false
 
-[node name="Plane" type="Area2D" parent="Path2D/PathFollow2D" groups=["plane"]]
-collision_mask = 11
+[node name="PLane" type="Area2D" parent="Path2D/PathFollow2D" groups=["plane"]]
 input_pickable = false
+script = ExtResource("5_aweqk")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Path2D/PathFollow2D/Plane"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Path2D/PathFollow2D/PLane"]
 shape = SubResource("CircleShape2D_ihaop")
 
-[node name="PlaneImage" type="Sprite2D" parent="Path2D/PathFollow2D/Plane"]
-rotation = 1.5708
-scale = Vector2(0.15, 0.15)
+[node name="PlaneImage" type="Sprite2D" parent="Path2D/PathFollow2D/PLane"]
 texture = ExtResource("3_2yfm5")
 
-[node name="Select" type="Sprite2D" parent="Path2D/PathFollow2D/Plane" groups=["select"]]
+[node name="SelectPlane" type="Sprite2D" parent="Path2D/PathFollow2D/PLane" groups=["select"]]
 visible = false
-position = Vector2(-1, 0)
+scale = Vector2(0.8, 0.8)
 texture = ExtResource("3_b8tuj")
+script = ExtResource("8_34bph")
 
-[connection signal="body_entered" from="Target" to="." method="_on_target_body_entered"]
-[connection signal="body_entered" from="Path2D/PathFollow2D/Plane" to="." method="_on_plane_body_entered"]
+[node name="PlaneWarningCollision" type="Area2D" parent="Path2D/PathFollow2D"]
+collision_layer = 4
+collision_mask = 4
+input_pickable = false
+script = ExtResource("9_733bd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Path2D/PathFollow2D/PlaneWarningCollision"]
+shape = SubResource("CircleShape2D_kv332")
+
+[node name="Warning" type="Sprite2D" parent="Path2D/PathFollow2D/PlaneWarningCollision"]
+visible = false
+texture = ExtResource("10_8j881")
+script = ExtResource("11_3yo24")
+
+[connection signal="area_entered" from="Target" to="Target" method="_on_area_entered"]
+[connection signal="area_entered" from="Path2D/PathFollow2D/PLane" to="Path2D/PathFollow2D/PLane" method="_on_area_entered"]
+[connection signal="area_entered" from="Path2D/PathFollow2D/PlaneWarningCollision" to="Path2D/PathFollow2D/PlaneWarningCollision" method="_on_area_entered"]
+[connection signal="area_exited" from="Path2D/PathFollow2D/PlaneWarningCollision" to="Path2D/PathFollow2D/PlaneWarningCollision" method="_on_area_exited"]
