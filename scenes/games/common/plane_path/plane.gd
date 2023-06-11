@@ -10,4 +10,4 @@ func get_plane_id():
 
 # plane collision
 func _on_area_entered(_area):
-	Events.trigger("plane_collision")
+	Events.trigger("plane_crashed", plane_id)

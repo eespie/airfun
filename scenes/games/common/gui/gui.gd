@@ -8,3 +8,6 @@ func _pause() -> void:
 	$Paused.pause()
 	get_tree().paused = true
 	
+func game_over() -> void:
+	$GameOver.game_over()
+	get_tree().paused = true

@@ -45,7 +45,7 @@ func get_target_pos() -> Vector2:
 			return target_pos
 	return Vector2(0, 0)
 
-func _on_timer_timeout():
+func _on_plane_pop_timer_timeout():
 	if plane_count > 5:
 		return
 		

@@ -1,0 +1,52 @@
+[gd_scene load_steps=11 format=3 uid="uid://dwe3jwnmr3wru"]
+
+[ext_resource type="Script" path="res://scenes/games/common/explosion/explosion.gd" id="1_v4bv1"]
+[ext_resource type="Texture2D" uid="uid://dx6wv1niodv3w" path="res://assets/2D/explosion/explosion00.png" id="2_0lag2"]
+[ext_resource type="Texture2D" uid="uid://hnreol5w0xtw" path="res://assets/2D/explosion/explosion01.png" id="3_ed51b"]
+[ext_resource type="Texture2D" uid="uid://dxdkvnqgmfjvs" path="res://assets/2D/explosion/explosion02.png" id="4_52yxv"]
+[ext_resource type="Texture2D" uid="uid://dovb0c433d7vn" path="res://assets/2D/explosion/explosion03.png" id="5_c8u2a"]
+[ext_resource type="Texture2D" uid="uid://rkbivi6jtth6" path="res://assets/2D/explosion/explosion04.png" id="6_56mm6"]
+[ext_resource type="Texture2D" uid="uid://o22uhie2r51k" path="res://assets/2D/explosion/explosion05.png" id="7_8rd3b"]
+[ext_resource type="Texture2D" uid="uid://cbks6c5fhkexs" path="res://assets/2D/explosion/explosion06.png" id="8_icn40"]
+[ext_resource type="Texture2D" uid="uid://5t6tu8cbs4tx" path="res://assets/2D/explosion/explosion07.png" id="9_w84w2"]
+[ext_resource type="Texture2D" uid="uid://bhbggerg8ucyl" path="res://assets/2D/explosion/explosion08.png" id="10_nbae6"]
+
+[node name="Explosion" type="Node2D"]
+scale = Vector2(0.1, 0.1)
+script = ExtResource("1_v4bv1")
+
+[node name="Explosion00" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("2_0lag2")
+
+[node name="Explosion01" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("3_ed51b")
+
+[node name="Explosion02" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("4_52yxv")
+
+[node name="Explosion03" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("5_c8u2a")
+
+[node name="Explosion04" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("6_56mm6")
+
+[node name="Explosion05" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("7_8rd3b")
+
+[node name="Explosion06" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("8_icn40")
+
+[node name="Explosion07" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("9_w84w2")
+
+[node name="Explosion08" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("10_nbae6")

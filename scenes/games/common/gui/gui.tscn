@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://cobaxpg7avvu2"]
+[gd_scene load_steps=7 format=3 uid="uid://cobaxpg7avvu2"]
 
 [ext_resource type="Theme" uid="uid://bkflfrecdmlo2" path="res://assets/themes/default_theme.tres" id="1_p7yp0"]
 [ext_resource type="Script" path="res://scenes/games/common/gui/score.gd" id="2_5p6r5"]
 [ext_resource type="Script" path="res://scenes/games/common/gui/gui.gd" id="2_531yg"]
 [ext_resource type="Script" path="res://scenes/games/common/gui/high_score.gd" id="3_b2dlj"]
 [ext_resource type="PackedScene" uid="uid://cko02oljhiby" path="res://scenes/paused/paused.tscn" id="4_ubofy"]
+[ext_resource type="PackedScene" uid="uid://dqvnn2w00ddl1" path="res://scenes/game_over/game_over.tscn" id="6_k5nh1"]
 
 [node name="GUI" type="Control"]
 layout_mode = 3
@@ -41,5 +42,9 @@ text = "HighScore 123456"
 script = ExtResource("3_b2dlj")
 
 [node name="Paused" parent="." instance=ExtResource("4_ubofy")]
+visible = false
+layout_mode = 1
+
+[node name="GameOver" parent="." instance=ExtResource("6_k5nh1")]
 visible = false
 layout_mode = 1

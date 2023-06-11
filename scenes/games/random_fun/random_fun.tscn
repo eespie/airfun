@@ -50,10 +50,6 @@ grow_vertical = 2
 texture = SubResource("NoiseTexture2D_555lb")
 metadata/_edit_lock_ = true
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 2.0
-one_shot = true
-
 [node name="RandomFun" type="Node2D" parent="."]
 script = ExtResource("2_4kswr")
 
@@ -71,4 +67,11 @@ offset_right = 1920.0
 offset_bottom = 1080.0
 metadata/_edit_lock_ = true
 
-[connection signal="timeout" from="Timer" to="RandomFun" method="_on_timer_timeout"]
+[node name="PlanePopTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="GameOverTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="PlanePopTimer" to="RandomFun" method="_on_plane_pop_timer_timeout"]
+[connection signal="timeout" from="GameOverTimer" to="." method="_on_game_over_timer_timeout"]

@@ -1,0 +1,71 @@
+[gd_scene load_steps=5 format=3 uid="uid://dqvnn2w00ddl1"]
+
+[ext_resource type="Theme" uid="uid://bkflfrecdmlo2" path="res://assets/themes/default_theme.tres" id="1_tl53o"]
+[ext_resource type="Script" path="res://scenes/game_over/game_over.gd" id="2_hsany"]
+[ext_resource type="AudioStream" uid="uid://cdw56dwl6eey" path="res://assets/sounds/switch_007.ogg" id="4_uqhnn"]
+
+[sub_resource type="GDScript" id="GDScript_17g83"]
+script/source = "extends VFlowContainer
+
+func _on_main_menu_pressed() -> void:
+	var root = get_tree().get_root().get_tree()
+	root.paused = false
+	Events.trigger(\"change_scene_root\", \"main_menu/main_menu\", get_tree().get_root().get_tree())
+"
+
+[node name="GameOver" type="Control"]
+process_mode = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_tl53o")
+script = ExtResource("2_hsany")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -35.0
+offset_top = -30.0
+offset_right = 1955.0
+offset_bottom = 1110.0
+color = Color(0.309804, 0, 0, 0.337255)
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -221.0
+offset_right = 221.0
+offset_bottom = 130.0
+grow_horizontal = 2
+theme_type_variation = &"HeaderLarge"
+theme_override_font_sizes/font_size = 100
+text = "Game Over"
+horizontal_alignment = 1
+
+[node name="Options" type="VFlowContainer" parent="." node_paths=PackedStringArray("shortcut_context")]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -150.0
+offset_top = 142.0
+offset_right = 149.0
+offset_bottom = 195.0
+grow_horizontal = 2
+shortcut_context = NodePath("")
+alignment = 1
+script = SubResource("GDScript_17g83")
+metadata/_edit_group_ = true
+
+[node name="MainMenu" type="Button" parent="Options"]
+layout_mode = 2
+text = "Return to Main Menu"
+
+[node name="GameOverSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_uqhnn")
+
+[connection signal="pressed" from="Options/MainMenu" to="Options" method="_on_main_menu_pressed"]
