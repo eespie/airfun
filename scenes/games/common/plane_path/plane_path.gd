@@ -3,15 +3,21 @@ extends Node2D
 @onready var path2D : Path2D = $Path2D
 @onready var pathFollow2D :PathFollow2D = $Path2D/PathFollow2D
 @onready var plane = $Path2D/PathFollow2D/PLane
+@onready var plane_warning = $Path2D/PathFollow2D/PlaneWarningCollision
 @onready var curve: Curve2D
 @onready var target = $Target
 
 @export var waiting_radius :float = 50.0
+
+var segment_length = 30
 var screen_center = Vector2(960, 540)
 var speed = 50
 var progress = 0.0
 var selected : bool = false
-var last_point
+# last point on curve
+var last_point: Vector2
+# last vector on curve
+var last_vector: Vector2
 
 var plane_id :int = 0
 
@@ -60,6 +66,11 @@ func set_plane_pos(pos:Vector2):
 	_smooth()
 	pathFollow2D.set_progress(0.0)
 	pathFollow2D.set_loop(true)
+	# Ignore collisions
+	plane.monitorable = false
+	plane.monitoring = false
+	plane_warning.monitorable = false
+	plane_warning.monitoring = false
 	
 func _smooth():
 	var point_count = curve.get_point_count()
@@ -75,8 +86,11 @@ func _get_spline(i):
 	return spline
 
 func _get_point(i):
-	var point_count = curve.get_point_count()
-	i = wrapi(i, 0, point_count - 1)
+	var max_index = curve.get_point_count() - 1
+	if i < 0:
+		i = 0
+	if i > max_index:
+		i = max_index
 	return curve.get_point_position(i)
 	
 
@@ -93,15 +107,23 @@ func _on_plane_select(select :bool, id :int):
 func _on_mouse_button_clicked(mouse: Vector2):
 	if plane_selected != 0:
 		return
-		
+	
 	var current_position = curve.sample_baked(progress)
+
 	if current_position.distance_to(mouse) > 32:
-		return
+		return # click did not hit plane
+	
 	_select(true)
-	var plane_pos = curve.get_closest_point(mouse)
+	# Allow collisions
+	plane.monitorable = true
+	plane.monitoring = true
+	plane_warning.monitorable = true
+	plane_warning.monitoring = true
+	var plane_pos = current_position
 	curve.clear_points()
 	curve.add_point(plane_pos)
 	last_point = mouse
+	last_vector = plane_pos.direction_to(mouse)
 	curve.add_point(last_point)
 	_smooth()
 	pathFollow2D.set_loop(false)
@@ -122,21 +144,28 @@ func _on_mouse_button_released(_mouse: Vector2):
 func _on_mouse_drag(mouse: Vector2):
 	if not selected:
 		return
-
-	if last_point == null:
-		last_point = mouse
-	var increment = mouse - last_point
-	if increment.length() > 30:
-		curve.add_point(mouse)
-		last_point = mouse
-		_smooth()
+		
 	# Mouse arrive on target
 	if target.position.distance_to(mouse) < 32:
 		_select(false)
-		var last = target.position
-		curve.add_point(last)
+		curve.add_point(target.position)
+		_smooth()
+		return
+		
+	if last_point.distance_to(mouse) < segment_length:
+		return
+		
+	var current_vector = last_point.direction_to(mouse)
+	print(str("Angle: ", rad_to_deg(last_vector.angle_to(current_vector))))
+	if abs(last_vector.angle_to(current_vector)) < PI/2.0:
+		curve.add_point(mouse)
+		last_vector = current_vector
+		last_point = mouse
+		_smooth()
+
 
 func _on_plane_arrived(id: int):
 	if plane_id == id:
 		queue_free()
+
 	

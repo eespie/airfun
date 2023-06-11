@@ -15,7 +15,7 @@ func _ready():
 	bind_events()
 	Events.trigger("new_game", game_name)
 	Events.trigger("timer_next", initial_wait_time)
-
+	Events.register("plane_collision", self)
 
 func bind_events() -> void:
 	Events.register("timer_next", self)
@@ -40,3 +40,7 @@ func _input(event: InputEvent) -> void:
 
 func _on_timer_next(wait_time: float):
 	$Timer.start(wait_time)
+
+	
+func _on_plane_collision():
+	Events.trigger("change_scene_root", "main_menu/main_menu", get_tree())

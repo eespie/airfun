@@ -14,5 +14,5 @@ func _on_area_entered(_area):
 	Events.trigger("plane_warning_collision_start", plane_id)
 
 
-func _on_area_exited(area):
+func _on_area_exited(_area):
 	Events.trigger("plane_warning_collision_end", plane_id)

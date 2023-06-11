@@ -23,17 +23,17 @@ func bind_events():
 func _exit_tree():
 	Events.unregister_node(self)
 
-func _on_mouse_drag(mouse: Vector2):
+func _on_mouse_drag(mouse: Vector2i):
 	$Mouse.position = mouse
 	
-func _on_mouse_button_clicked(mouse: Vector2):
+func _on_mouse_button_clicked(mouse: Vector2i):
 	$Mouse.position = mouse
 		
 	
-func _on_mouse_button_released(mouse: Vector2):
+func _on_mouse_button_released(_mouse: Vector2i):
 	$Mouse.position = Vector2(-100, -100)
 
-func get_color(mouse:Vector2):
+func get_color(mouse:Vector2i):
 	var color :Color = terrain.get_texture().get_image().get_pixel(mouse.x, mouse.y)
 	return color
 	
@@ -60,9 +60,10 @@ func _on_timer_timeout():
 	
 	var plane_pos = Vector2(randi_range(margin, 1920 - margin), randi_range(margin, 1080 - margin));
 	plane_path.set_plane_pos(plane_pos)
-	Events.trigger("timer_next", 5)
+	Events.trigger("timer_next", randi_range(5, 10))
 	
 
-func _on_plane_arrived(plane_id):
+func _on_plane_arrived(_id: int):
+	Events.trigger("increment_score")
 	plane_count -= 1
-	Events.trigger("timer_next", 0.1)
+	Events.trigger("timer_next", randf_range(0.1, 2.0))

@@ -19,7 +19,7 @@ radius = 5.0
 radius = 32.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kv332"]
-radius = 96.0
+radius = 50.0
 
 [node name="PlanePath" type="Node2D" groups=["plane_path"]]
 script = ExtResource("1_v7ur2")
@@ -73,6 +73,7 @@ shape = SubResource("CircleShape2D_kv332")
 
 [node name="Warning" type="Sprite2D" parent="Path2D/PathFollow2D/PlaneWarningCollision"]
 visible = false
+scale = Vector2(0.45, 0.45)
 texture = ExtResource("10_8j881")
 script = ExtResource("11_3yo24")
 

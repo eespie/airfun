@@ -13,11 +13,9 @@ func save_game(savedict) -> void:
 func load_game() -> Dictionary:
 	if not FileAccess.file_exists(save_file):
 		return {}
-	var savegame = FileAccess.open(save_file, FileAccess.READ)
+	#var savegame = FileAccess.open(save_file, FileAccess.READ)
 	var savedict = {}
-	var content = savegame.get_line()
-	#print(content)
-	var json = JSON.new()
-	savedict = json.parse(content)
-	savegame.close()
-	return savedict.get_data()
+	var content = FileAccess.get_file_as_string(save_file)
+	savedict = JSON.parse_string(content)
+	#savegame.close()
+	return savedict
