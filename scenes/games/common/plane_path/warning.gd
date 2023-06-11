@@ -29,6 +29,7 @@ func get_plane_id():
 func _on_plane_warning_start(id: int):
 	if plane_id == id:
 		show()
+		Sound.play_sfx($WarningSFX)
 
 func _on_plane_warning_end(id: int):
 	if plane_id == id:

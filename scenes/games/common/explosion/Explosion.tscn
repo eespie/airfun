@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dwe3jwnmr3wru"]
+[gd_scene load_steps=12 format=3 uid="uid://dwe3jwnmr3wru"]
 
 [ext_resource type="Script" path="res://scenes/games/common/explosion/explosion.gd" id="1_v4bv1"]
 [ext_resource type="Texture2D" uid="uid://dx6wv1niodv3w" path="res://assets/2D/explosion/explosion00.png" id="2_0lag2"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://cbks6c5fhkexs" path="res://assets/2D/explosion/explosion06.png" id="8_icn40"]
 [ext_resource type="Texture2D" uid="uid://5t6tu8cbs4tx" path="res://assets/2D/explosion/explosion07.png" id="9_w84w2"]
 [ext_resource type="Texture2D" uid="uid://bhbggerg8ucyl" path="res://assets/2D/explosion/explosion08.png" id="10_nbae6"]
+[ext_resource type="AudioStream" uid="uid://co60pmbr6h4ix" path="res://assets/sounds/mixkit-car-explosion-debris-1562.ogg" id="11_84s67"]
 
 [node name="Explosion" type="Node2D"]
 scale = Vector2(0.1, 0.1)
@@ -50,3 +51,6 @@ texture = ExtResource("9_w84w2")
 [node name="Explosion08" type="Sprite2D" parent="."]
 visible = false
 texture = ExtResource("10_nbae6")
+
+[node name="ExplodeSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_84s67")

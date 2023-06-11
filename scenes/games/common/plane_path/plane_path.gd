@@ -7,6 +7,7 @@ extends Node2D
 @onready var gauge = $Path2D/PathFollow2D/Gauge
 @onready var curve: Curve2D
 @onready var target = $Target
+@onready var trajectory = $Trajectory
 
 @export var waiting_radius :float = 50.0
 
@@ -21,10 +22,11 @@ var last_point: Vector2
 var last_vector: Vector2
 var plane_id :int = 0
 var plane_selected :int = 0
-var plane_is_crashed: bool = false
+
+enum PlaneState {WAITING, RUNNING, CRASHED}
+var plane_state: PlaneState = PlaneState.WAITING
 
 var plane_warned = []
-
 var fuel :float = 60.0
 
 # Called when the node enters the scene tree for the first time.
@@ -45,7 +47,7 @@ func _exit_tree():
 	Events.unregister_node(self)
 	
 func _process(delta):
-	if plane_is_crashed:
+	if plane_state == PlaneState.CRASHED:
 		return
 		
 	var curve_len = curve.get_baked_length()
@@ -53,6 +55,22 @@ func _process(delta):
 	while progress > curve_len:
 		progress -= curve_len
 	pathFollow2D.set_progress(progress)
+
+
+	var current_transformation = curve.sample_baked_with_rotation(progress)
+	var current_rotation = current_transformation.get_rotation()
+	var current_position = current_transformation.get_origin()
+	
+	# Trajectory
+	trajectory.clear_points()
+	if plane_state == PlaneState.RUNNING:
+		var points = curve.get_baked_points()
+		var curve_index: int = points.size() - 2
+		var trajectory_progress = curve.get_closest_offset(points[curve_index])
+		while trajectory_progress > progress:
+			curve_index -= 1
+			trajectory.add_point(points[curve_index])
+			trajectory_progress = curve.get_closest_offset(points[curve_index])
 	
 	# Fuel management
 	fuel -= delta
@@ -60,13 +78,11 @@ func _process(delta):
 	if fuel < 10.0:
 		if plane_warned.find(plane_id) == -1:
 			Events.trigger("plane_warning_start", plane_id)
-	var current_transformation = curve.sample_baked_with_rotation(progress)
-	var current_rotation = current_transformation.get_rotation()
 	gauge.rotation = -current_rotation
 	if fuel < 0:
 		if plane_warned.find(plane_id) == -1:
 			Events.trigger("plane_warning_start", plane_id)
-		if not plane_is_crashed:
+		if plane_state != PlaneState.CRASHED:
 			Events.trigger("plane_crashed", plane_id)
 			
 	
@@ -75,10 +91,14 @@ func set_plane_id(id: int):
 	
 func set_target_pos(pos: Vector2):
 	target.set_position(pos)
+	var plane_color = Color.from_ok_hsl(randf_range(0.0, 1.0), randf_range(0.8, 1.0), randf_range(0.8, 1.0))
+	target.modulate = plane_color
+	plane.modulate = plane_color
 	propagate_call("set_plane_id", [plane_id])
 	
 func set_plane_pos(pos:Vector2):
 	curve = Curve2D.new()
+	curve.bake_interval = segment_length
 	path2D.set_curve(curve)
 	
 	print(str("Plane ", plane_id, " set pos ", pos))
@@ -145,6 +165,7 @@ func _on_mouse_button_clicked(mouse: Vector2):
 	plane.monitoring = true
 	plane_warning.monitorable = true
 	plane_warning.monitoring = true
+	plane_state = PlaneState.RUNNING
 	var plane_pos = current_position
 	curve.clear_points()
 	curve.add_point(plane_pos)
@@ -201,4 +222,4 @@ func _on_plane_warning_end(id: int):
 	
 func _on_plane_crashed(id: int):
 	if id == plane_id:
-		plane_is_crashed = true
+		plane_state = PlaneState.CRASHED

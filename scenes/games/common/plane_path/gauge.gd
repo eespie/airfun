@@ -4,7 +4,6 @@ extends Node2D
 
 var initial_fuel: float = 0.0
 
-
 func set_initial_fuel(fuel: float):
 	initial_fuel = fuel
 	

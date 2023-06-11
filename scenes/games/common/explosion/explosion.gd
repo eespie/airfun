@@ -33,7 +33,6 @@ func set_plane_id(id: int):
 func get_plane_id():
 	return plane_id
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	elapsed += delta
@@ -54,7 +53,7 @@ func explode(duration: float = 0.5):
 	get_children().all(hide_image)
 	full_duration = duration
 	elapsed = 0.0
-
+	Sound.play_sfx($ExplodeSFX)
 
 func hide_image(image):
 	image.hide()
