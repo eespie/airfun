@@ -79,7 +79,7 @@ scale = Vector2(0.8, 0.8)
 texture = ExtResource("3_b8tuj")
 script = ExtResource("8_34bph")
 
-[node name="Explosion" parent="Path2D/PathFollow2D/PLane" instance=ExtResource("9_ae7mr")]
+[node name="Explosion" parent="Path2D/PathFollow2D" instance=ExtResource("9_ae7mr")]
 
 [node name="PlaneWarning" type="Area2D" parent="Path2D/PathFollow2D"]
 collision_layer = 4
