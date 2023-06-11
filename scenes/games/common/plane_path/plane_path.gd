@@ -56,10 +56,8 @@ func _process(delta):
 		progress -= curve_len
 	pathFollow2D.set_progress(progress)
 
-
 	var current_transformation = curve.sample_baked_with_rotation(progress)
 	var current_rotation = current_transformation.get_rotation()
-	var current_position = current_transformation.get_origin()
 	
 	# Trajectory
 	trajectory.clear_points()
@@ -75,17 +73,15 @@ func _process(delta):
 	# Fuel management
 	fuel -= delta
 	gauge.set_fuel(fuel)
+	gauge.rotation = -current_rotation
 	if fuel < 10.0:
 		if plane_warned.find(plane_id) == -1:
 			Events.trigger("plane_warning_start", plane_id)
-	gauge.rotation = -current_rotation
 	if fuel < 0:
-		if plane_warned.find(plane_id) == -1:
-			Events.trigger("plane_warning_start", plane_id)
 		if plane_state != PlaneState.CRASHED:
 			Events.trigger("plane_crashed", plane_id)
-			
-	
+
+
 func set_plane_id(id: int):
 	plane_id = id
 	
