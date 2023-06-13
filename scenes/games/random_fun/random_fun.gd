@@ -2,7 +2,7 @@ extends Node2D
 
 
 var plane_path_scene: PackedScene = preload("res://scenes/games/common/plane_path/plane_path.tscn")
-@export var margin :int = 100
+@export var margin :int = 150
 
 var terrain :TextureRect
 
@@ -39,7 +39,7 @@ func get_color(mouse:Vector2i):
 	
 func get_target_pos() -> Vector2:
 	while true:
-		var target_pos = Vector2(randi_range(margin, 1920 - margin), randi_range(margin, 1080 - margin));
+		var target_pos = Vector2(randi_range(margin, Global.WIDTH - margin), randi_range(margin, Global.HEIGHT - margin));
 		var color = get_color(target_pos)
 		if color.g > color.r and color.g > color.b:
 			return target_pos
@@ -58,7 +58,7 @@ func _on_plane_pop_timer_timeout():
 	var target_pos = get_target_pos();
 	plane_path.set_target_pos(target_pos)
 	
-	var plane_pos = Vector2(randi_range(margin, 1920 - margin), randi_range(margin, 1080 - margin));
+	var plane_pos = Vector2(randi_range(margin, Global.WIDTH - margin), randi_range(margin, Global.HEIGHT - margin));
 	plane_path.set_plane_pos(plane_pos)
 	Events.trigger("timer_next", randi_range(5, 10))
 	

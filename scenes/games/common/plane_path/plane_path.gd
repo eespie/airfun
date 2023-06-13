@@ -12,7 +12,7 @@ extends Node2D
 @export var waiting_radius :float = 50.0
 
 var segment_length = 20
-var screen_center = Vector2(960, 540)
+var screen_center = Vector2(Global.WIDTH/2, Global.HEIGHT/2)
 var speed = 50
 var progress = 0.0
 var selected : bool = false
@@ -28,6 +28,8 @@ var plane_state: PlaneState = PlaneState.WAITING
 
 var plane_warned = []
 var fuel :float = 60.0
+
+var border_limit = 50
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -58,6 +60,15 @@ func _process(delta):
 
 	var current_transformation = curve.sample_baked_with_rotation(progress)
 	var current_rotation = current_transformation.get_rotation()
+	var cur_pos = current_transformation.get_origin()
+	
+	# Check screen boundaries
+	if cur_pos.x < border_limit or cur_pos.x > Global.WIDTH - border_limit or cur_pos.y < border_limit or cur_pos.y > Global.HEIGHT - border_limit:
+		if plane_warned.find(plane_id) == -1:
+			Events.trigger("plane_warning_start", plane_id)
+		if cur_pos.x < 0 or cur_pos.x > Global.WIDTH or cur_pos.y < 0 or cur_pos.y > Global.HEIGHT:
+			if plane_state != PlaneState.CRASHED:
+				Events.trigger("plane_crashed", plane_id)
 	
 	# Trajectory
 	trajectory.clear_points()

@@ -11,3 +11,7 @@ func get_plane_id():
 # plane collision
 func _on_area_entered(_area):
 	Events.trigger("plane_crashed", plane_id)
+
+
+func _on_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
+	Events.trigger("plane_crashed", plane_id)

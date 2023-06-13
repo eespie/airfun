@@ -11,6 +11,10 @@ const SETTINGS_FILE := "user://settings.cfg"
 const CONFIG_SETTINGS_SECTION := "settings"
 const CONFIG_GAMES_SECTION := "games"
 
+var WIDTH = ProjectSettings.get_setting("display/window/size/viewport_width")
+var HEIGHT = ProjectSettings.get_setting("display/window/size/viewport_height")
+
+
 func _ready() -> void:
 	print_debug("Global ready")
 	Engine.max_fps = 60
