@@ -38,7 +38,7 @@ theme_override_font_sizes/font_size = 100
 text = "Game Over"
 horizontal_alignment = 1
 
-[node name="Options" type="VFlowContainer" parent="." node_paths=PackedStringArray("shortcut_context")]
+[node name="Options" type="VFlowContainer" parent="."]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -48,7 +48,6 @@ offset_top = 142.0
 offset_right = 149.0
 offset_bottom = 195.0
 grow_horizontal = 2
-shortcut_context = NodePath("")
 alignment = 1
 script = ExtResource("3_sr3si")
 metadata/_edit_group_ = true
