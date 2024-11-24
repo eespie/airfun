@@ -1,11 +1,29 @@
-[gd_scene load_steps=7 format=3 uid="uid://brk6pe1mqx36n"]
+[gd_scene load_steps=10 format=3 uid="uid://brk6pe1mqx36n"]
 
+[ext_resource type="Script" path="res://scenes/games/common/background.gd" id="1_2fnks"]
 [ext_resource type="Theme" uid="uid://bkflfrecdmlo2" path="res://assets/themes/default_theme.tres" id="1_c0giq"]
-[ext_resource type="Texture2D" uid="uid://bq050ylakuguo" path="res://assets/images/map2.png" id="1_eq578"]
 [ext_resource type="Script" path="res://scenes/main_menu/version_label.gd" id="1_s1lxo"]
 [ext_resource type="Script" path="res://scenes/main_menu/menu_options.gd" id="2_xaiuv"]
 [ext_resource type="AudioStream" uid="uid://nae25xj2of8v" path="res://assets/sounds/switch_006.ogg" id="5_uxbfp"]
 [ext_resource type="AudioStream" uid="uid://ce2e610h5dh5g" path="res://assets/sounds/rollover5.ogg" id="6_84hyy"]
+
+[sub_resource type="Gradient" id="Gradient_ryya2"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.0395648, 0.176063, 0.432245, 0.684471, 0.727027, 0.759162, 1)
+colors = PackedColorArray(0.703808, 0.703808, 0.703808, 1, 0.552956, 0.552956, 0.552955, 1, 0.2538, 0.54, 0.42552, 1, 0.301783, 0.647498, 0.507429, 1, 0.654902, 0.580392, 0.372549, 1, 0.754498, 0.704219, 0.254275, 1, 0.4186, 0.62335, 0.91, 1, 0.546737, 0.695827, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_vee6b"]
+frequency = 0.002
+fractal_lacunarity = 2.2
+fractal_weighted_strength = 0.33
+domain_warp_type = 1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_v8fhd"]
+width = 1920
+height = 1080
+generate_mipmaps = false
+color_ramp = SubResource("Gradient_ryya2")
+noise = SubResource("FastNoiseLite_vee6b")
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -15,17 +33,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="BG" type="ColorRect" parent="."]
-layout_mode = 0
-offset_left = -35.0
-offset_top = -30.0
-offset_right = 1955.0
-offset_bottom = 1110.0
-color = Color(0.227451, 0.368627, 0.521569, 1)
-
-[node name="BackgroundMap" type="Sprite2D" parent="."]
-texture = ExtResource("1_eq578")
-centered = false
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("NoiseTexture2D_v8fhd")
+script = ExtResource("1_2fnks")
 
 [node name="Title" type="Label" parent="."]
 layout_mode = 1
