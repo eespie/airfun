@@ -72,6 +72,7 @@ func _process(delta):
 	# Trajectory
 	trajectory.clear_points()
 	if plane_state == PlaneState.RUNNING:
+		trajectory.show()
 		var points = curve.get_baked_points()
 		var curve_index: int = points.size() - 2
 		var trajectory_progress = curve.get_closest_offset(points[curve_index])
@@ -93,11 +94,11 @@ func set_target_pos(pos: Vector2):
 	
 func set_plane_pos(pos:Vector2):
 	curve = Curve2D.new()
+	curve.clear_points()
 	curve.bake_interval = segment_length
 	path2D.set_curve(curve)
 	
 	print(str("Plane ", plane_id, " set pos ", pos))
-	curve.clear_points()
 
 	# build a waiting circle
 	var angle = 2 * PI / 10

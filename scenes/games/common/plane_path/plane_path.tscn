@@ -25,6 +25,7 @@ radius = 50.0
 script = ExtResource("1_v7ur2")
 
 [node name="Trajectory" type="Line2D" parent="."]
+visible = false
 texture_repeat = 2
 points = PackedVector2Array(65, 93, 131, 60, 199, 49, 277, 104, 281, 132)
 width = 25.0

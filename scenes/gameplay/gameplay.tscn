@@ -49,7 +49,6 @@ layout_mode = 2
 size_flags_vertical = 1
 text = "Get started with Godot Skeleton by replacing this Gameplay scene with your own."
 horizontal_alignment = 1
-autowrap_mode = 2
 
 [node name="PauseInstructions" type="Label" parent="GUI/Stack"]
 layout_mode = 2
