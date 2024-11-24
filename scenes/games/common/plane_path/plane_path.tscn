@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://drmf6emnmt2pd"]
+[gd_scene load_steps=17 format=3 uid="uid://drmf6emnmt2pd"]
 
 [ext_resource type="Script" path="res://scenes/games/common/plane_path/plane_path.gd" id="1_v7ur2"]
 [ext_resource type="Script" path="res://scenes/games/common/plane_path/target.gd" id="2_mesrh"]
@@ -13,11 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://dwe3jwnmr3wru" path="res://scenes/games/common/explosion/Explosion.tscn" id="9_ae7mr"]
 [ext_resource type="Texture2D" uid="uid://dpbbjjogn0xwo" path="res://assets/2D/warning.png" id="10_8j881"]
 [ext_resource type="Script" path="res://scenes/games/common/plane_path/warning.gd" id="11_3yo24"]
-[ext_resource type="Script" path="res://scenes/games/common/plane_path/gauge.gd" id="12_tun1a"]
-[ext_resource type="Texture2D" uid="uid://b2eveui1g6iw1" path="res://assets/2D/gauge-bg.png" id="13_kq6e4"]
 [ext_resource type="AudioStream" uid="uid://2ixbje2s61am" path="res://assets/sounds/radar2.ogg" id="13_rjext"]
-[ext_resource type="Texture2D" uid="uid://bxxhdjirfwvhi" path="res://assets/2D/gauge-fuel.png" id="14_succl"]
-[ext_resource type="Texture2D" uid="uid://clyxeyfpc5td2" path="res://assets/2D/gauge.png" id="15_o4t7y"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xjg8e"]
 radius = 5.0
@@ -96,27 +92,6 @@ script = ExtResource("11_3yo24")
 
 [node name="WarningSFX" type="AudioStreamPlayer2D" parent="Path2D/PathFollow2D/PlaneWarning/Warning"]
 stream = ExtResource("13_rjext")
-
-[node name="Gauge" type="Node2D" parent="Path2D/PathFollow2D"]
-script = ExtResource("12_tun1a")
-
-[node name="GaugeBackground" type="Sprite2D" parent="Path2D/PathFollow2D/Gauge"]
-position = Vector2(47, -24)
-rotation = 1.5708
-texture = ExtResource("13_kq6e4")
-centered = false
-
-[node name="GaugeFuel" type="Sprite2D" parent="Path2D/PathFollow2D/Gauge"]
-position = Vector2(47, -24)
-rotation = 1.5708
-texture = ExtResource("14_succl")
-centered = false
-
-[node name="GaugeFrame" type="Sprite2D" parent="Path2D/PathFollow2D/Gauge"]
-position = Vector2(47, -24)
-rotation = 1.5708
-texture = ExtResource("15_o4t7y")
-centered = false
 
 [connection signal="area_entered" from="Target" to="Target" method="_on_area_entered"]
 [connection signal="area_entered" from="Path2D/PathFollow2D/PLane" to="Path2D/PathFollow2D/PLane" method="_on_area_entered"]

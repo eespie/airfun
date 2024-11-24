@@ -34,4 +34,3 @@ func _on_plane_warning_start(id: int):
 func _on_plane_warning_end(id: int):
 	if plane_id == id:
 		hide()
-

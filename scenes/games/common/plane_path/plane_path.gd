@@ -4,7 +4,6 @@ extends Node2D
 @onready var pathFollow2D :PathFollow2D = $Path2D/PathFollow2D
 @onready var plane = $Path2D/PathFollow2D/PLane
 @onready var plane_warning = $Path2D/PathFollow2D/PlaneWarning
-@onready var gauge = $Path2D/PathFollow2D/Gauge
 @onready var curve: Curve2D
 @onready var target = $Target
 @onready var trajectory = $Trajectory
@@ -81,17 +80,6 @@ func _process(delta):
 			trajectory.add_point(points[curve_index])
 			trajectory_progress = curve.get_closest_offset(points[curve_index])
 	
-	# Fuel management
-	fuel -= delta
-	gauge.set_fuel(fuel)
-	gauge.rotation = -current_rotation
-	if fuel < 10.0:
-		if plane_warned.find(plane_id) == -1:
-			Events.trigger("plane_warning_start", plane_id)
-	if fuel < 0:
-		if plane_state != PlaneState.CRASHED:
-			Events.trigger("plane_crashed", plane_id)
-
 
 func set_plane_id(id: int):
 	plane_id = id
@@ -124,10 +112,6 @@ func set_plane_pos(pos:Vector2):
 	plane.monitoring = false
 	plane_warning.monitorable = false
 	plane_warning.monitoring = false
-	# Set fuel
-	fuel = target.position.distance_to(pos) / speed * 2.0 + 10.0
-	print("Initial Fuel: ", fuel)
-	gauge.set_initial_fuel(fuel)
 	
 func _smooth():
 	var point_count = curve.get_point_count()
