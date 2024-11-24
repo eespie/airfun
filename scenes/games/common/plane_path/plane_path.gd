@@ -7,6 +7,7 @@ extends Node2D
 @onready var curve: Curve2D
 @onready var target = $Target
 @onready var trajectory = $Trajectory
+@onready var highlight_plane = %HighlightPlane
 
 @export var waiting_radius :float = 50.0
 
@@ -50,6 +51,11 @@ func _exit_tree():
 func _process(delta):
 	if plane_state == PlaneState.CRASHED:
 		return
+		
+	if plane_state == PlaneState.WAITING:
+		highlight_plane.show()
+	else:
+		highlight_plane.hide()
 		
 	var curve_len = curve.get_baked_length()
 	progress += delta * speed
