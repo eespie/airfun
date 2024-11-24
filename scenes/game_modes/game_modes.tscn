@@ -6,12 +6,12 @@
 [ext_resource type="AudioStream" uid="uid://ce2e610h5dh5g" path="res://assets/sounds/rollover5.ogg" id="5_iuu52"]
 [ext_resource type="AudioStream" uid="uid://nae25xj2of8v" path="res://assets/sounds/switch_006.ogg" id="6_1dyyv"]
 
-[sub_resource type="Gradient" id="Gradient_qxaw8"]
+[sub_resource type="Gradient" id="Gradient_3bbuf"]
 interpolation_mode = 1
 offsets = PackedFloat32Array(0, 0.0395648, 0.176063, 0.432245, 0.684471, 0.727027, 0.759162, 1)
 colors = PackedColorArray(0.703808, 0.703808, 0.703808, 1, 0.552956, 0.552956, 0.552955, 1, 0.2538, 0.54, 0.42552, 1, 0.301783, 0.647498, 0.507429, 1, 0.654902, 0.580392, 0.372549, 1, 0.754498, 0.704219, 0.254275, 1, 0.4186, 0.62335, 0.91, 1, 0.546737, 0.695827, 1, 1)
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_p4mc6"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_gadhd"]
 frequency = 0.002
 fractal_lacunarity = 2.2
 fractal_weighted_strength = 0.33
@@ -21,8 +21,8 @@ domain_warp_type = 1
 width = 1920
 height = 1080
 generate_mipmaps = false
-color_ramp = SubResource("Gradient_qxaw8")
-noise = SubResource("FastNoiseLite_p4mc6")
+color_ramp = SubResource("Gradient_3bbuf")
+noise = SubResource("FastNoiseLite_gadhd")
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3

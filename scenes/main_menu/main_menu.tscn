@@ -16,7 +16,7 @@ colors = PackedColorArray(0.703808, 0.703808, 0.703808, 1, 0.552956, 0.552956, 0
 noise_type = 3
 frequency = 0.002
 fractal_lacunarity = 2.2
-fractal_weighted_strength = 0.5
+fractal_weighted_strength = 0.33
 domain_warp_type = 1
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_v8fhd"]
